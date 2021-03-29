@@ -1,6 +1,5 @@
 import React, { useEffect, useState, FC } from "react"
-import { History } from 'umi';
-import Layout from "@/pages/components/layout/Layout"
+import CommonLayout from "@/pages/components/layout/commonLayout"
 
 interface IndexPageProps {
   history: History;
@@ -8,14 +7,11 @@ interface IndexPageProps {
 
 
 const IndexPage: FC<IndexPageProps> = (props) => {
-  const { history } = props
-
-  const toLogin = function () {
-    history.push('/login')
-  }
 
   return (
-    <Layout></Layout>
+    <CommonLayout>
+      {props.children}
+    </CommonLayout>
   );
 }
 

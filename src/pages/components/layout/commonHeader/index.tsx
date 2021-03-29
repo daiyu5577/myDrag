@@ -1,4 +1,5 @@
 import React, { useEffect, useState, FC } from "react"
+import { NavLink } from 'umi';
 import { Menu } from 'antd';
 import { HomeOutlined, FolderOutlined, FolderOpenOutlined, FolderAddOutlined } from '@ant-design/icons';
 
@@ -12,6 +13,7 @@ type MenuListItem = Partial<{
   title: string,
   icon: any,
   href: string,
+  path: string,
   childrens: Array<MenuListItem>
 }>
 
@@ -21,6 +23,7 @@ const menuList: Array<MenuListItem> = [
     title: '首页',
     icon: HomeOutlined,
     href: '',
+    path: '/home',
     childrens: []
   },
   {
@@ -34,12 +37,14 @@ const menuList: Array<MenuListItem> = [
         title: '所有资源',
         icon: FolderOpenOutlined,
         href: '',
+        path: '/source/allSource',
       },
       {
         key: 'sourceUpload',
         title: '上传资源',
         icon: FolderAddOutlined,
         href: '',
+        path: '/source/sourceUpload',
       }
     ]
   },
@@ -51,7 +56,11 @@ function renderSubMenuItem(item: MenuListItem) {
       {
         item.childrens!.map((subItem: MenuListItem) => {
           if (!subItem.childrens || !subItem.childrens.length) {
-            return (<Menu.Item key={subItem.key} title={subItem.title} icon={<subItem.icon />}>{subItem.title}</Menu.Item>)
+            return (
+              <Menu.Item key={subItem.key} title={subItem.title} icon={<subItem.icon />}>
+                <NavLink to={(subItem.path as string)} >{subItem.title}</NavLink>
+              </Menu.Item>
+            )
           }
           return renderSubMenuItem(subItem)
         })
@@ -60,7 +69,7 @@ function renderSubMenuItem(item: MenuListItem) {
   )
 }
 
-const Head: FC<HeadPageProps> = (props) => {
+const CommonHeader: FC<HeadPageProps> = (props) => {
 
   let [current, setCurrent] = useState<string>('home')
 
@@ -73,7 +82,11 @@ const Head: FC<HeadPageProps> = (props) => {
       {
         menuList.map(item => {
           if (!item.childrens || !item.childrens.length) {
-            return (<Menu.Item key={item.key} title={item.title} icon={<item.icon />}>{item.title}</Menu.Item>)
+            return (
+              <Menu.Item key={item.key} title={item.title} icon={<item.icon />}>
+                <NavLink to={(item.path as string)} >{item.title}</NavLink>
+              </Menu.Item>
+            )
           }
           return renderSubMenuItem(item)
         })
@@ -82,4 +95,4 @@ const Head: FC<HeadPageProps> = (props) => {
   );
 }
 
-export default Head
+export default CommonHeader
