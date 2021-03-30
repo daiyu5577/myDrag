@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react"
-import { Button, InputNumber } from 'antd';
+import { Button, InputNumber, Space } from 'antd';
 import { connect, useStore, useSelector, useDispatch } from 'umi';
 import { useGetModel } from "@/utils/useModel"
 import * as style from "./index.less"
@@ -31,8 +31,10 @@ const Toolbar: React.FC<ToolbarProps> = (props) => {
 
   return (
     <div className={style.toolbar}>
-      {btnList.map((v, i) => (<Button key={i} style={{ margin: '0 10px 10px 0' }}>{v.title}</Button>))}
-      <SetSize />
+      <Space size="middle" wrap>
+        {btnList.map((v, i) => (<Button key={i}>{v.title}</Button>))}
+        <SetSize />
+      </Space>
     </div >
   );
 }

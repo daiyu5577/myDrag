@@ -10,7 +10,9 @@ const Home: React.FC<HomeProps> = (props) => {
   return (
     <div className={style.home}>
       <Toolbar />
-      <Sidebar />
+      <div className="content">
+        <Sidebar />
+      </div>
     </div >
   );
 }
