@@ -1,16 +1,19 @@
 import React, { useState, useMemo } from "react"
 import { Button, InputNumber } from 'antd';
-import { connect, useStore, useSelector } from 'umi';
-import { GlobalModelState } from "@/models/toolbar"
+import { connect, useStore, useSelector, useDispatch } from 'umi';
+import { useGetModel } from "@/utils/useModel"
 import * as style from "./toolbar.less"
 
 interface ToolbarProps {
 }
 
+// 设置画布大小
 function SetSize() {
 
-  const [width, setWidth] = useState<number>(2481)
-  const [height, setHeight] = useState<number>(3508)
+  const { canvasWidth, canvasHeigth } = useGetModel('toolbar')
+  const dispatch = useDispatch()
+  const [width, setWidth] = useState<number>(canvasWidth)
+  const [height, setHeight] = useState<number>(canvasHeigth)
 
   return (
     <div className="setSize">
@@ -24,8 +27,7 @@ function SetSize() {
 
 const Toolbar: React.FC<ToolbarProps> = (props) => {
 
-  const toolbarModel = useSelector((state: { toolbar: GlobalModelState }) => (state.toolbar))
-  const { btnList } = toolbarModel
+  const { btnList } = useGetModel('toolbar')
 
   return (
     <div className={style.toolbar}>

@@ -7,26 +7,33 @@ export type BtnListItem = {
   title: string
 }
 
-export interface GlobalModelState {
+export interface ToolbarModelState {
+  canvasWidth: number;
+  canvasHeigth: number;
   btnList: Array<BtnListItem>;
 }
 
-export interface GlobalModelType {
+export interface ToolbarModelType {
   namespace: 'toolbar';
-  state: GlobalModelState;
+  state: ToolbarModelState;
   effects: {
     query: Effect;
   };
   reducers: {
-    updata: Reducer<GlobalModelState>;
+    updata: Reducer<ToolbarModelState>;
   };
   subscriptions: { setup: Subscription };
 }
 
-const toolbarModel: GlobalModelType = {
+const toolbarModel: ToolbarModelType = {
   namespace: 'toolbar',
 
   state: {
+    // 画布宽
+    canvasWidth: 2481,
+    // 画布高
+    canvasHeigth: 3508,
+    // 顶部head操作按钮
     btnList: [
       {
         type: '',
