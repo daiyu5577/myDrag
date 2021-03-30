@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react"
 import { Button, InputNumber } from 'antd';
 import { connect, useStore, useSelector, useDispatch } from 'umi';
 import { useGetModel } from "@/utils/useModel"
-import * as style from "./toolbar.less"
+import * as style from "./index.less"
 
 interface ToolbarProps {
 }
